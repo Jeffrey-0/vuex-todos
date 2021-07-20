@@ -190,7 +190,7 @@ const store =  new Vuex.Store({
 
 * ```js
   // 1.从vuex中按需导入mapState函数
-  import { getters } from 'vuex'
+  import { mapGetters } from 'vuex'
   
   // 2.将全局数据，映射为当前组件的计算属性
   computed: {
