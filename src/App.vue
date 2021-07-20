@@ -1,7 +1,25 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <a-input placeholder="请输入任务" class="my_ipt"></a-input>
+    <a-button type="primary">添加事项</a-button>
+
+    <a-list bordered :dataSource="list" class="dt_list">
+      <a-list-item slot="renderItem" slot-scope="item">
+        <a-checkbox>{{item.info}}</a-checkbox>
+        <a slot="actions">删除</a>
+      </a-list-item>
+
+      <!-- footer区域 -->
+      <div class="footer" slot="footer">
+        <span>0条剩余</span>
+        <a-button-group>
+          <a-button type="primary">全部</a-button>
+          <a-button>未完成</a-button>
+          <a-button>已完成</a-button>
+        </a-button-group>
+        <a>清除已完成</a>
+      </div>
+    </a-list>
   </div>
 </template>
 
@@ -9,20 +27,36 @@
 import HelloWorld from './components/HelloWorld.vue'
 
 export default {
-  name: 'App',
+  name: 'app',
   components: {
-    HelloWorld
+    
+  },
+  data () {
+    return {
+      list: []
+    }
+  },
+  created () {
+    this.$store.dispatch('getList')
   }
 }
 </script>
 
-<style>
+<style lang="scss">
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  padding: 10px;
+  .my_ipt {
+    width: 500px;
+    margin-right: 10px;
+  }
+  .dt_list {
+    width: 500px;
+    margin-top: 10px;
+  }
+  .footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 }
 </style>
